@@ -1,0 +1,42 @@
+{
+  "name": "osm-idf",
+  "version": "0.0.1",
+  "main": "index.js",
+  "description": "OSM GeoJson service",
+  "url": "",
+  "keywords": [
+    "map",
+    "osm",
+    "geojson"
+  ],
+  "licenses": [
+    {
+      "type": "BSD"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "contributors": [
+    {
+      "name": "Mikhail Kotelnikov",
+      "email": "mikhail.kotelnikov@ubimix.com"
+    }
+  ],
+  "dependencies": {
+    "express": "*",
+    "mosaic-commons": "~0.0.15",
+    "mosaic-teleport": "0.0.21",
+    "mosaic-teleport-server": "0.0.7",
+    "pg.js": "^3.6.2",
+    "underscore": "*"
+  },
+  "scripts": {
+    "start": "node ./node_modules/mosaic-teleport-server/src/Server.js -port 9876 -path ''"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
