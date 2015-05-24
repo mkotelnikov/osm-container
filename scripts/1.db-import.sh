@@ -18,9 +18,8 @@ dbname=`cat ../.db-config/db.name`
 dbencode="UTF8"
 
 run() {
-   # osm2pgsql --slim --create --host $dbhost --port $dbport --username $dbuser --database $dbname ../data-osm/data-osm/empty.osm
    import_osm --create
-   psql -h "$dbhost" -p "$dbport" -U "$dbuser" -d "$dbname" -f "$scriptsDir/01.db-import.sql"
+   psql -h "$dbhost" -p "$dbport" -U "$dbuser" -d "$dbname" -f "$scriptsDir/1.db-import.sql"
 }
 
 import_osm() {
