@@ -1,7 +1,8 @@
 #!/bin/bash
 
 command=$1
-dumpfile=$2
+current_dir=`pwd`
+dumpfile="$current_dir/$2"
 
 usage(){
    echo "Usage:"
@@ -13,7 +14,7 @@ if [ "$command" = "" ]; then
     exit 1;
 fi
 
-if [ "$dumpfile" = "" ]; then
+if [ "$2" = "" ]; then
     usage
     exit 1;
 fi
@@ -37,7 +38,7 @@ dump() {
 
 restore() {
    echo "Restoring backup from '$dumpfile'..."
-   psql -h "$dbhost" -p "$dbport" -U "$dbuser" -d "$dbname" < "$psql"
+   psql -h "$dbhost" -p "$dbport" -U "$dbuser" -d "$dbname" < "$dumpfile"
    echo "Done."
 }
 
