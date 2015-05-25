@@ -1,11 +1,13 @@
 #!/bin/bash
 
-osm_file=$1
-if [ "$osm_file" = "" ]; then
+if [ "$1" = "" ]; then
     echo "Usage:"
     echo " 1.db-import.sh ../data/osm.pbf"
     exit 1; 
 fi
+
+osm_file_dir=`pwd`
+osm_file="$osm_file_dir/$1"
 
 cd `dirname $0`
 scriptsDir=`pwd`
