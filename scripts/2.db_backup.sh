@@ -18,7 +18,6 @@ if [ "$dumpfile" = "" ]; then
     exit 1;
 fi
 
-    
 cd `dirname $0`
 
 scriptsDir=`pwd`
