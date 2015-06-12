@@ -8,13 +8,13 @@ dbuser=docker
 dbpass=docker
 
 cd `dirname $0`
-mkdir ../.db-config
-echo "$dbdock" > ../.db-config/db.dock
-echo "$dbhost" > ../.db-config/db.host
-echo "$dbport" > ../.db-config/db.port
-echo "$dbuser" > ../.db-config/db.user
-echo "$dbpass" > ../.db-config/db.pass
-echo "$dbname" > ../.db-config/db.name
+mkdir ../.config-db
+echo "$dbdock" > ../.config-db/db.dock
+echo "$dbhost" > ../.config-db/db.host
+echo "$dbport" > ../.config-db/db.port
+echo "$dbuser" > ../.config-db/db.user
+echo "$dbpass" > ../.config-db/db.pass
+echo "$dbname" > ../.config-db/db.name
 
 sudo docker build -t postgis:2.1 github.com/helmi03/docker-postgis.git
 # sudo docker run --name $dbdock -d -v $HOME/postgres_data:/var/lib/postgresql postgis:2.1

@@ -4,10 +4,10 @@ var Path = require('path');
 var OsmService = require('./OsmService');
 
 module.exports = function() {
-    var dir = '../../.db-config/';
+    var dir = '../../.config-db/';
     var host = readFile(dir + 'db.host', 'localhost');
     var user = readFile(dir + 'db.user', 'postgres');
-    var port = readFile(dir + 'db.port', '5432');
+    var port = 5432; // readFile(dir + 'db.port', '5432');
     var password = readFile(dir + 'db.pass', 'postgres');
     var dbname = readFile(dir + 'db.name', 'postgres');
     var config = {

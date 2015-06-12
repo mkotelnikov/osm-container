@@ -1,5 +1,5 @@
 #!/bin/bash
 cd `dirname $0`
-dbdock=`cat ../.db-config/db.dock`
+dbdock=`cat ../.config-db/db.dock`
 sudo docker stop $dbdock
 

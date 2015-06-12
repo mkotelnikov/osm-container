@@ -11,12 +11,12 @@ osm_file="$osm_file_dir/$1"
 
 cd `dirname $0`
 scriptsDir=`pwd`
-dbdock=`cat ../.db-config/db.dock`
-dbhost=`cat ../.db-config/db.host`
-dbport=`cat ../.db-config/db.port`
-dbuser=`cat ../.db-config/db.user`
-dbpass=`cat ../.db-config/db.pass`
-dbname=`cat ../.db-config/db.name`
+dbdock=`cat ../.config-db/db.dock`
+dbhost=`cat ../.config-db/db.host`
+dbport=`cat ../.config-db/db.port`
+dbuser=`cat ../.config-db/db.user`
+dbpass=`cat ../.config-db/db.pass`
+dbname=`cat ../.config-db/db.name`
 dbencode="UTF8"
 
 run() {
