@@ -1,22 +1,17 @@
 #!/bin/bash
 
-dbdock=osm-postgis
-dbname=osm
-dbhost=127.0.0.1
-dbport=65432
-dbuser=docker
-dbpass=docker
-
 cd `dirname $0`
-mkdir ../.config-db
-echo "$dbdock" > ../.config-db/db.dock
-echo "$dbhost" > ../.config-db/db.host
-echo "$dbport" > ../.config-db/db.port
-echo "$dbuser" > ../.config-db/db.user
-echo "$dbpass" > ../.config-db/db.pass
-echo "$dbname" > ../.config-db/db.name
+dbdock=`cat ../.config-db/db.dock`
+dbhost=`cat ../.config-db/db.host`
+dbport=`cat ../.config-db/db.port`
+dbuser=`cat ../.config-db/db.user`
+dbpass=`cat ../.config-db/db.pass`
+dbname=`cat ../.config-db/db.name`
 
+echo "Preparing the postgis:2.1 image (github.com/helmi03/docker-postgis.git)..."
 sudo docker build -t postgis:2.1 github.com/helmi03/docker-postgis.git
+echo "Done."
+
 # sudo docker run --name $dbdock -d -v $HOME/postgres_data:/var/lib/postgresql postgis:2.1
 # sudo docker run --name $dbdock -p $dbhost:$dbport:5432 -d postgis:2.1
 sudo docker run --name $dbdock -p $dbhost:$dbport:5432 -d postgis:2.1

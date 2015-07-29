@@ -19,6 +19,7 @@ var SQL_TEMPLATE_FILES = {
     LoadEntityRelations : 'service.LoadEntityRelations.sql',
     LoadEntityInfo : 'service.LoadEntityInfo.sql',
     SearchEntityInfo : 'service.SearchEntityInfo.sql',
+    SearchEntityInfoInRelation : 'service.SearchEntityInfoInRelation.sql',
 };
 
 var OsmService = Mosaic.Class.extend({
@@ -140,9 +141,7 @@ var OsmService = Mosaic.Class.extend({
             var sql = that._sql.LoadRelationMembersWithInfo({
                 ids : ids
             });
-            return that._execSql(sql, options).then(function(results) {
-                return ids.length > 1 ? results : results[0];
-            });
+            return that._execSql(sql, options);
         });
     }),
 
@@ -234,17 +233,7 @@ var OsmService = Mosaic.Class.extend({
     searchEntityInfo : rest('/search', 'get', function(options) {
         var that = this;
         return Mosaic.P.then(function() {
-            var where = options.where;
-            if (!where) {
-                var propertiesCriteria;
-                try {
-                    propertiesCriteria = JSON.parse(options.properties);
-                } catch (err) {
-                    return [];
-                }
-                where = that //
-                ._getWhereStatement(propertiesCriteria);
-            }
+            var where = that._getSearchWhereStatement(options);
             if (where) {
                 where = 'WHERE (' + where + ')';
             }
@@ -255,6 +244,43 @@ var OsmService = Mosaic.Class.extend({
             return that._execSql(sql, options);
         });
     }),
+
+    /**
+     * Returns information about the specified entity (id, properties +
+     * geometry).
+     */
+    searchEntityInfoInRelation : rest('/relation/:id/search', 'get', function(
+            options) {
+        var that = this;
+        return Mosaic.P.then(function() {
+            var where = that._getSearchWhereStatement(options);
+            if (where) {
+                where = ' AND (' + where + ')';
+            }
+            var sql = that._sql.SearchEntityInfoInRelation({
+                where : where,
+                ids : that._getIds(options)
+            });
+            // console.log('RELATION SEARCH SQL: ', sql);
+            return that._execSql(sql, options);
+        });
+    }),
+
+    _getSearchWhereStatement : function(options) {
+        var where = options.where;
+        if (!where) {
+            var propertiesCriteria;
+            try {
+                propertiesCriteria = JSON.parse(options.properties);
+            } catch (err) {
+                return [];
+            }
+            where = that //
+            ._getWhereStatement(propertiesCriteria);
+        }
+        return where;
+    },
+
     /**
      * Returns information about the specified entity (id, properties +
      * geometry).
