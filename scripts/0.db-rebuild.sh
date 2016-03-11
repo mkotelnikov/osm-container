@@ -22,7 +22,7 @@ createdb -h "$dbhost" -p "$dbport" -U "$dbuser" "$dbname" -E "$dbencode"
 createlang -h "$dbhost" -p "$dbport"  -U "$dbuser" plpgsql "$dbname"
 
 psql -h "$dbhost" -p "$dbport" -U "$dbuser" -d "$dbname" \
-    -c 'create extension postgis; create extension hstore;'
+    -c 'create extension postgis; create extension hstore; create extension plv8;'
 
 # psql -h "$dbhost" -p "$dbport" -U "$dbuser" -d "$dbname" \
 #    -c 'create schema if not exists import'
