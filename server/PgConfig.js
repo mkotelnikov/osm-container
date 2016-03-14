@@ -4,18 +4,21 @@ var Path = require('path');
 module.exports = {
     getDbConfig : function(profile) {
         var dir = '../.config-db/';
-        var host = readFile(dir + 'db.host', 'localhost');
-        var user = readFile(dir + 'db.user', 'postgres');
-        var port = readFile(dir + 'db.port', '5432');
-        var password = readFile(dir + 'db.pass', 'postgres');
-        var dbname = readFile(dir + 'db.name', 'postgres');
-        return {
+        var env = process.env;
+        var host = readFile(dir + 'db.host', env.DB_PORT_5432_TCP_ADDR || 'localhost');
+        var port = readFile(dir + 'db.port', env.DB_PORT_5432_TCP_PORT || '5432');
+        var user = readFile(dir + 'db.user', env.DB_ENV_POSTGRES_USER || 'postgres');
+        var password = readFile(dir + 'db.pass', env.DB_ENV_POSTGRES_PASSWORD || 'postgres');
+        var dbname = readFile(dir + 'db.name', env.DB_ENV_POSTGRES_DB || 'postgres');
+        var result = {
             host : host,
             port : port,
             user : user,
             password : password,
             dbname : dbname
         };
+        console.log('>>', result);
+        return result;
     }
 };
 
